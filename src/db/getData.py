@@ -54,7 +54,7 @@ clothing_info.rename(columns={'product_Link': 'ProductPage',
                      inplace=True)
 
 # write the DataFrame to a SQL file
-with open('clothing_info.sql', 'w') as f:
+with open('src/db/clothing_info.sql', 'w') as f:
     f.write(f"CREATE TABLE buddy_table (")
     for i, column in enumerate(clothing_info.columns):
         f.write(f"{column} ")
@@ -64,6 +64,6 @@ with open('clothing_info.sql', 'w') as f:
             f.write("VARCHAR(255));\n\n")
     
     for index, row in clothing_info.iterrows():
-        f.write(f"INSERT INTO buddy_table VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
+        f.write(f"INSERT INTO buddy_table VALUES (ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)'{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
         
 print(clothing_info)
