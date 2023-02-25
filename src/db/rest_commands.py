@@ -1,17 +1,15 @@
-from brickhack_db_utils import *
-from getData import *
+from db.brickhack_db_utils import *
 
 def setUp():
     build_tables()
-    insert_data()
+    # insert_data()
 
 def build_tables():
-    exec_sql_file("schema.sql")
-    return
+    exec_sql_file('src/db/clothing_info.sql')
 
-def insert_data():
-    # insert from getData
-    return
+# def insert_data():
+#     # insert from getData
+#     return
 
 
 def query(brands, types):

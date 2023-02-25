@@ -5,10 +5,10 @@ import os
 def connect():
     psycopg2.connect(
     database="brickhack9",
-    user="brickhack9",
+    user="postgres",
     password="brickhack9",
     host="localhost",
-    port="5433"
+    port="5432"
     )
 
 def exec_sql_file(path):

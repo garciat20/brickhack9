@@ -46,11 +46,11 @@ for items in clothes:
 clothing_info = pd.DataFrame.from_dict(Kappa, orient='index')
 clothing_info.index.name = 'Product Name'
 clothing_info.reset_index(inplace=True)
-clothing_info.rename(columns={'product_Link': 'Product Page',
-                              'original_Price': 'Original Price',
-                              'discounted_Price': 'Discounted Price',
-                              'discounted_Percentage': 'Discount Rate',
-                              'image_Link': 'Image Link'},
+clothing_info.rename(columns={'product_Link': 'ProductPage',
+                              'original_Price': 'OriginalPrice',
+                              'discounted_Price': 'DiscountedPrice',
+                              'discounted_Percentage': 'DiscountRate',
+                              'image_Link': 'ImageLink'},
                      inplace=True)
 
 # write the DataFrame to a SQL file
