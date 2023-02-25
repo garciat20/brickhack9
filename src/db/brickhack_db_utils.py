@@ -8,7 +8,7 @@ def connect():
     user="brickhack9",
     password="brickhack9",
     host="localhost",
-    port="4999"
+    port="5433"
     )
 
 def exec_sql_file(path):
