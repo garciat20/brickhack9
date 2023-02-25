@@ -11,6 +11,15 @@ def connect():
     port="4999"
     )
 
+def exec_sql_file(path):
+    full_path = os.path.join(os.path.dirname(__file__), f'../../{path}')
+    conn = connect()
+    cur = conn.cursor()
+    with open(full_path, 'r') as file:
+        cur.execute(file.read())
+    conn.commit()
+    conn.close()
+
 def exec_get_one(sql, args={}):
     conn = connect()
     cur = conn.cursor()
