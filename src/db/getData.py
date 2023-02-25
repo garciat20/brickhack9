@@ -44,7 +44,7 @@ for items in clothes:
 
 # convert the dictionary to a pandas DataFrame
 clothing_info = pd.DataFrame.from_dict(Kappa, orient='index')
-clothing_info.index.name = 'Product Name'
+clothing_info.index.name = 'ProductName'
 clothing_info.reset_index(inplace=True)
 clothing_info.rename(columns={'product_Link': 'ProductPage',
                               'original_Price': 'OriginalPrice',
@@ -64,6 +64,6 @@ with open('src/db/clothing_info.sql', 'w') as f:
             f.write("VARCHAR(255));\n\n")
     
     for index, row in clothing_info.iterrows():
-        f.write(f"INSERT INTO buddy_table VALUES (ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)'{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
+        f.write(f"INSERT INTO buddy_table VALUES (ProductName, ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)'{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
         
 print(clothing_info)
