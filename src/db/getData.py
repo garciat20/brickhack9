@@ -6,7 +6,7 @@ import requests
 import re
 
 # create a connection to the PostgreSQL database
-engine = create_engine('postgresql://brickhack9:brickhack9@localhost:5433/brickhack9')
+# engine = create_engine('postgresql://brickhack9:brickhack9@localhost:5432/brickhack9')
 
 # fetch data from the webpage
 URL = "https://kappa-usa.com/collections/mens-sale"
@@ -55,6 +55,7 @@ clothing_info.rename(columns={'product_Link': 'ProductPage',
 
 # write the DataFrame to a SQL file
 with open('src/db/clothing_info.sql', 'w') as f:
+    f.write("DROP TABLE IF EXISTS buddy_table; \n")
     f.write(f"CREATE TABLE buddy_table (")
     for i, column in enumerate(clothing_info.columns):
         f.write(f"{column} ")
@@ -64,6 +65,6 @@ with open('src/db/clothing_info.sql', 'w') as f:
             f.write("VARCHAR(255));\n\n")
     
     for index, row in clothing_info.iterrows():
-        f.write(f"INSERT INTO buddy_table VALUES (ProductName, ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)'{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
+        f.write(f"INSERT INTO buddy_table (ProductName, ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
         
 print(clothing_info)

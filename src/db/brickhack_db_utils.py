@@ -3,17 +3,19 @@ import yaml
 import os
 
 def connect():
-    psycopg2.connect(
+    return psycopg2.connect(
     database="brickhack9",
-    user="postgres",
+    user="brickhack9",
     password="brickhack9",
     host="localhost",
-    port="5432"
+    port=5432
     )
 
 def exec_sql_file(path):
     full_path = os.path.join(os.path.dirname(__file__), f'../../{path}')
     conn = connect()
+    if conn is None:
+        print("there is no connection")
     cur = conn.cursor()
     with open(full_path, 'r') as file:
         cur.execute(file.read())
