@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_restful import Resource, Api
 import db.rest_commands
+from api.brand_api_commands import Brands
 
 app = Flask(__name__)
 api = Api(app)
 
+api.add_resource(Brands, '/items')
 
 
 

@@ -2,7 +2,7 @@ from db.brickhack_db_utils import *
 
 def setUp():
     build_tables()
-    sample_data()
+    # sample_data()
     # insert_data()
 
 def build_tables():
@@ -12,8 +12,12 @@ def build_tables():
 #     # insert from getData
 #     return
 
-def sample_data():
-    return print(exec_get_all("SELECT * FROM buddy_table"))
+def get_all_items():
+    # print(exec_get_all("SELECT * FROM buddy_table"))
+    return exec_get_all("SELECT * FROM buddy_table")
+
+def brand_and_category_items(name, category):
+    return exec_get_all(f"""SELECT """)
 
 def query(brands, types):
     sql = """
