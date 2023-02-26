@@ -6,10 +6,11 @@ from api.brand_api_commands import Brands
 app = Flask(__name__)
 api = Api(app)
 
-api.add_resource(Brands, '/items')
+api.add_resource(Brands, '/items',
+                 '/<string:brand>')
 
 
 
 if __name__ == '__main__':
-    db.rest_commands.setUp()
+    # db.rest_commands.setUp()
     app.run(debug=True, port=4999)
