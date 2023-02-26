@@ -22,6 +22,7 @@ for items in clothes:
     
     Kappa[item_name] = {
         'product_Link' : '',
+        'product_Description': '',
         'original_Price' : '',
         'discounted_Price' : '',
         'discounted_Percentage' : '',
@@ -33,20 +34,31 @@ for items in clothes:
     image_link = 'https:' + (image_link['data-src']).replace('{width}',str(180))
     Kappa[item_name]['image_Link'] = image_link
     
+    
     Kappa[item_name]['product_Link'] = 'https://kappa-usa.com' + (product_page['href'])
+    response = requests.get('https://kappa-usa.com' + (product_page['href']))
+    soup =  BeautifulSoup(response.content, 'html.parser')
+    description = soup.find('div', class_='product-single__description').p.text.strip()
+    Kappa[item_name]['product_Description'] = description
+    
     price_span = items.find("div", {"class": "grid-product__price"})
     price_span = price_span.text.strip()
     pattern = r"\$\d+\.\d{2}"
     matches = re.findall(pattern, price_span)
+    
+    
     Kappa[item_name]['original_Price'] = matches[0]
     Kappa[item_name]['discounted_Price'] = matches[1]
     Kappa[item_name]['discounted_Percentage'] = str(int(round(float(matches[0][1:len(matches[0])]) / float(matches[1][1:len(matches[1])]) -1, 2) * 100)) + '%'
+
+print (Kappa)
 
 # convert the dictionary to a pandas DataFrame
 clothing_info = pd.DataFrame.from_dict(Kappa, orient='index')
 clothing_info.index.name = 'ProductName'
 clothing_info.reset_index(inplace=True)
 clothing_info.rename(columns={'product_Link': 'ProductPage',
+                              'product_Description': 'ProductDescription',
                               'original_Price': 'OriginalPrice',
                               'discounted_Price': 'DiscountedPrice',
                               'discounted_Percentage': 'DiscountRate',
@@ -65,6 +77,6 @@ with open('src/db/clothing_info.sql', 'w') as f:
             f.write("VARCHAR(255));\n\n")
     
     for index, row in clothing_info.iterrows():
-        f.write(f"INSERT INTO buddy_table (ProductName, ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
+        f.write(f"INSERT INTO buddy_table (ProductName, ProductDescription, ProductPage, OriginalPrice, DiscountedPrice, DiscountRate, ImageLink)VALUES ('{row[0]}', '{row[1]}', '{row[2]}', '{row[3]}', '{row[4]}', '{row[5]}');\n")
         
 print(clothing_info)
