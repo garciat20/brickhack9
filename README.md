@@ -10,3 +10,9 @@ This project was created during RIT's annual hackathon, Brickhack, specifically 
 - Seamless view of all the clothing through scrolling.
 - Transition from clothing to the product page with a clic
 
+##Technologies used
+
+-Python (used to webscrape the data from the web through a usage of the requests libary and Beautifulsoup4 libaries)
+-PostgreSQl (backend/database management of the collected clothing information 
+-Flask (used to host the PostgreSQL data)
+-Swift (used Xcode to display the data on IOS devices)
