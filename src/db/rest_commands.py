@@ -18,8 +18,8 @@ def get_all_items():
     # print(exec_get_all("SELECT * FROM buddy_table"))
     return exec_get_all("SELECT * FROM buddy_table")
 
-def get_brand_and_category_items(name, category):
-    return exec_get_all(f"""SELECT """)
+# def get_brand_and_category_items(name, category):
+#     return exec_get_all(f"""SELECT """)
 
 def get_brand_items(name):
     name = name.lower()
@@ -35,9 +35,9 @@ def get_brand_items(name):
     # build_tables()
     return exec_get_all(f"SELECT * FROM buddy_table")
 
-def query(brands, types):
-    sql = """
-    SELECT * FROM """
-    items = exec_get_all(sql)
+# def query(brands, types):
+#     sql = """
+#     SELECT * FROM """
+#     items = exec_get_all(sql)
 
 
